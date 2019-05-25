@@ -1,7 +1,10 @@
 <?php 
+    include_once 'app/config.inc.php';
     include_once 'template/header.inc.php';
     include_once 'template/navbar.inc.php';
     include_once 'template/slideshow.inc.php';
+
+
 ?>
 <hr>
 <div class="container my-5">
@@ -24,6 +27,7 @@
         </div>
     </div>
 </div>
+
 
 <?php
     include_once 'template/footer.inc.php';

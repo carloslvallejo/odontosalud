@@ -64,7 +64,7 @@
                     <!---agregar dropdown blog, citas, usuarios-->
                     <div class="dropdown-menu" aria-labelledby="gestor">
                         <a href="<?php echo RUTA_SERVICE ?>" class="dropdown-item">Nueva Cita</a>
-                        <a href="#" class="dropdown-item">Historial</a>
+                        <a href="<?php echo RUTA_HISTORIAL_SERVICE ?>" class="dropdown-item">Historial</a>
                     </div>
                 </div>
                 <?php

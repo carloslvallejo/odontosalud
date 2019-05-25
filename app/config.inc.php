@@ -19,6 +19,7 @@
     define("MODIFICAR", RUTA_ADMIN. "/modificar");
     define("BORRAR_ENTRADA", RUTA_ADMIN. "/borrar-entrada");
     define("RUTA_SERVICE", SERVIDOR. "/servicio");
+    define("RUTA_HISTORIAL_SERVICE", SERVIDOR. "/servicio-historial");
     define(("RUTA_CONTACTO"), SERVIDOR. "/contactanos");
     define("RUTA_PERFIL", SERVIDOR."/perfil");
     define("RUTA_COMENTARIO", SERVIDOR. "/comentarios");

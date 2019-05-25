@@ -55,6 +55,9 @@ if($part_rutas[0] == 'odontosalud') {
             case 'recuperar-clave':
                 $ruta_directa = 'views/recuperacion.php';
                 break;
+            case 'servicio-historial':
+                $ruta_directa = 'views/servicio-historial.php';
+                break;
         }
     } else if(count($part_rutas) == 3) {
         if($part_rutas[1] == 'registro-correcto') {

@@ -1,12 +1,34 @@
 <?php
+include_once 'app/config.inc.php';
 include_once 'app/controlsesion.inc.php';
+include_once 'app/conexion.inc.php';
 include_once 'app/redireccion.inc.php';
 include_once 'template/header.inc.php';
 include_once 'template/navbar.inc.php';
+include_once 'app/validarCita.inc.php';
+include_once 'app/citas.inc.php';
+include_once 'app/repoCitas.inc.php';
 
 if(!ControlSesion::sec_ini()) {
     
     Redireccion::redirigir(RUTA_LOGIN);
+}
+
+if(isset($_POST['newcita'])) {
+    Conexion::open_conex();
+    $validarcita = new ValidarCita($_POST['fecha'], $_POST['hora'], $_SESSION['idusuario'], $_POST['motivo'], Conexion::get_conex());
+    if($validarcita -> citaValida()) {
+        $nuevacita = new Citas('',$validarcita -> getUsuario(), $validarcita -> getMotivo(), $validarcita -> getHora(), 
+        $validarcita -> getFecha(), $_POST['descrip']); 
+        
+            $insertar_cita = RepositorioCitas::insertar_citas(Conexion::get_conex(), $nuevacita);
+            if($insertar_cita) {
+                Redireccion::redirigir(RUTA_HISTORIAL_SERVICE);
+            }
+    }
+
+    Conexion::close_conex();
+
 }
 ?>
 <div class="container">
@@ -22,62 +44,20 @@ if(!ControlSesion::sec_ini()) {
 <div class="container" style="height:563px;">
     <div class="row mt-2">
         <div class="col-md-8">
-            <form class="offset-5">
-                <div class="form-row">
-                    <div class="col-md-6">
-                        <label for="fecha">Fecha</label>
-                        <input type="date" class="form-control" name="fecha" id="fecha">
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label for="Hora">Hora</label>
-                            <select class="custom-select" id="Hora">
-                                <option selected>-- : --</option>
-                                <option value="1">08:00 am</option>
-                                <option value="2">09:00 am</option>
-                                <option value="3">10:00 am</option>
-                                <option value="4">11:00 am</option>
-                                <option value="5">02:00 pm</option>
-                                <option value="6">03:00 pm</option>
-                                <option value="7">04:00 pm</option>
-                                <option value="8">05:00 pm</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="form-row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="Motivo">Motivo</label>
-                            <select class="custom-select" id="Motivo">
-                                <option selected>--Seleccionar--</option>
-                                <option value="1">Consulta</option>
-                                <option value="2">Limpieza</option>
-                                <option value="3">Cirugia</option>
-                                <option value="4">Extraccion</option>
-                                <option value="5">Ortodoncia</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="col-md-12">
-                        <label for="descrip">Breve Descripcion</label>
-                        <textarea name="descrip" id="descrip" class="form-control" rows="5" placeholder="Breve Descripcion"></textarea>
-                    </div>
-                </div>
-                <br>
-                <div class="d-flex justify-content-between">
-                    <button type="submit" class="btn btn-primary">Registrar Cita</button>
-                    <button type="reset" class="btn btn-danger">Limpiar Campos</button>
-                </div>
+            <form class="offset-5" method="POST" action="<?php echo RUTA_SERVICE; ?>">
+                <?php 
+                if(isset($_POST['newcita'])) {
+                    include_once 'template/citavalidada.inc.php';
+                } else {
+                    include_once 'template/citavacia.inc.php';
+                }
+                ?>
             </form>
         </div>
         <div class="col-md-2 offset-md-2">
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-action active">Nueva Cita</a>
-                <a href="#" class="list-group-item list-group-item-action">Historial</a>
+                <a href="<?php echo RUTA_HISTORIAL_SERVICE; ?>" class="list-group-item list-group-item-action">Historial</a>
             </div>
         </div>
     </div>
