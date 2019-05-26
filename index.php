@@ -48,6 +48,9 @@ if($part_rutas[0] == 'odontosalud') {
             case 'perfil':
                 $ruta_directa = 'views/perfil.php';
                 break;
+            case 'cambio-clave':
+                $ruta_directa = 'views/cambioclave.php';
+                break;
             case 'comentarios':
                 $pagina_actual = 'admin';
                 $ruta_directa = 'views/comentarios.php';

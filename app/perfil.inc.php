@@ -7,8 +7,9 @@
         private $apellido;
         private $apellidodos;
         private $edad;
+        private $foto;
 
-        public function __construct($id, $idusuario, $nombre, $nombredos, $apellido, $apellidodos, $edad, $sexo) {
+        public function __construct($id, $idusuario, $nombre, $nombredos, $apellido, $apellidodos, $edad, $sexo, $foto) {
             $this -> id = $id;
             $this -> idusuario = $idusuario;
             $this -> nombre = $nombre;
@@ -17,6 +18,7 @@
             $this -> apellidodos = $apellidodos;
             $this -> edad = $edad;
             $this -> sexo = $sexo;
+            $this -> foto = $foto;
         }
 
         // GETTERS
@@ -44,6 +46,9 @@
         public function getSexo() {
             return $this -> sexo;
         }
+        public function getFoto() {
+            return $this -> foto;
+        }
         // SETTERS
         public function setNombre($nombre) {
             return $this -> nombre = $nombre;
@@ -62,6 +67,9 @@
         }
         public function setSexo($sexo) {
             return $this -> sexo = $sexo;
+        }
+        public function setFoto($foto) {
+            return $this -> foto = $foto;
         }
     }
 ?>

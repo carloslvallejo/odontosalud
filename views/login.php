@@ -62,6 +62,7 @@
         </form>
         <hr>
         <p class="text-center">¿Has olvidado la contraseña? <a href="<?php echo RECUPERACION; ?>">Recuperar</a></p>
+        <p class="text-center">¿Aun no estas registrado? Pulsa <a href="<?php echo RUTA_REGISTRO; ?>">Aqui</a></p>
     </div>
 </div>
 

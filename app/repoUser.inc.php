@@ -132,5 +132,23 @@
             }
             return $usuario;
         }
+        public static function update_pwd($conn, $id, $pwd) {
+            $cambioExist = false;
+            if(isset($conn)) {
+                try {
+                    $sql = "UPDATE usuario SET pwd = :pwd WHERE idusuario = :id";
+
+                    $sentencia = $conn -> prepare($sql);
+                    $sentencia -> bindParam(':pwd', $pwd, PDO::PARAM_STR);
+                    $sentencia -> bindParam(':id', $id, PDO::PARAM_STR);
+                    
+                    $cambioExist = $sentencia -> execute();
+                   
+                } catch (PDOException $th) {
+                    echo "ERROR: " . $th -> getMessage();
+                }
+            }
+            return $cambioExist;
+        }
     }
 ?>

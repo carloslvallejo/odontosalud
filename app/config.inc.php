@@ -24,6 +24,7 @@
     define("RUTA_PERFIL", SERVIDOR."/perfil");
     define("RUTA_COMENTARIO", SERVIDOR. "/comentarios");
     define("RECUPERACION", SERVIDOR."/recuperar-clave");
+    define("CAMBIO_CLAVE", SERVIDOR. "/cambio-clave");
 
     //Recursos
     define("RUTA_CSS", SERVIDOR . "/css/");

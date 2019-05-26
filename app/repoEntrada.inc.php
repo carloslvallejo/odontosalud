@@ -90,7 +90,7 @@ include_once 'app/entradas.inc.php';
                     $sentencia = $conn -> prepare($sql);
                     $sentencia -> bindParam(':titulo', $titulo, PDO::PARAM_STR);
                     $sentencia -> execute();
-                    $result = $result -> fetchAll();
+                    $result = $sentencia -> fetchAll();
 
                     if(count($result)) {
                         foreach($result as $fila) {
@@ -240,6 +240,7 @@ include_once 'app/entradas.inc.php';
         }
         // modificar datos de entradas
         public static function update_entradas($conn, $titulo, $texto, $idautor) {
+            $updateExisto = false;
             if(isset($conn)) {
                 try {
                     $sql = "UPDATE entradas SET titulo = :titulo, texto = :texto, fecha = now() WHERE idautor = :idautor";
@@ -250,12 +251,13 @@ include_once 'app/entradas.inc.php';
                     $sentencia -> bindParam(':texto', $texto, PDO::PARAM_STR);
                     $sentencia -> bindParam(':idautor', $idautor, PDO::PARAM_STR);
 
-                    $sentencia -> execute();
+                    $updateExisto = $sentencia -> execute();
 
                 } catch (PDOException $th) {
                     echo 'ERROR UPDATE: ' . $th -> getMessage();
                 }
             }
+            return $updateExisto;
         }
         public static function cambiar_estado($conn, $id) {
             $newestado = false;

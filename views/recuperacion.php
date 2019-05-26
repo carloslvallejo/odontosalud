@@ -5,7 +5,7 @@
     include_once 'template/navbar.inc.php';
 
     if(isset($_POST['send'])) {
-
+        
     }
 ?>
 
